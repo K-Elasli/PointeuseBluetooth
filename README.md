@@ -1,2 +1,2 @@
-# PointeuseBluetooth
-p|. un paragraphe aligné à gauche
+# Projet STI2D SIN : Pointeuse Bluetooth
+## LPMF 2015 - 2016
