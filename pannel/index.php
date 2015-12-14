@@ -1,5 +1,7 @@
 <?php
-include('scripts/dbConnect.php');
+include('../scripts/dbConnect.php');
+$date = date(d)."/".date(m)."/".date(y);
+$heure = date(H).":".date(i).":".date(s);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -60,6 +62,18 @@ include('scripts/dbConnect.php');
                                     <h3 class="panel-title"><span class="glyphicon glyphicon-save"></span> Passages aujourd'hui</h3>
                                 </div>
                                 <div class="panel-body" style="font-size: 46px">
+                                    <?php
+                                    //script pour afficher le nb de passages
+                                    $reponse = $bdd->query('SELECT * FROM testhistorique');
+                                    while ($donnees = $reponse->fetch())
+                                    {
+                                        if ($donnees['date'] == $date){
+                                            $nbPassages = $nbPassages + 1;
+                                        }
+                                    }
+                                    $reponse->closeCursor(); // Termine le traitement de la requête
+                                    echo $nbPassages;
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +83,23 @@ include('scripts/dbConnect.php');
                                     <h3 class="panel-title"><span class="glyphicon glyphicon-thumbs-up"></span> Employés présents</h3>
                                 </div>
                                 <div class="panel-body" style="font-size: 46px">
-                                     0
+                                    <?php
+                                    //script pour afficher le nb de présent
+                                    $reponse = $bdd->query('SELECT * FROM testhistorique');
+                                    while ($donnees = $reponse->fetch())
+                                    {
+                                        if ($donnees['date'] == $date){
+                                            if ($donnees['sens'] == "0"){
+                                                $nbPresents = $nbPresents + 1;
+                                            }
+                                            else{
+                                                $nbPresents = $nbPresents - 1;
+                                            }
+                                        }
+                                    }
+                                    $reponse->closeCursor(); // Termine le traitement de la requête
+                                    echo $nbPresents;
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +109,16 @@ include('scripts/dbConnect.php');
                                     <h3 class="panel-title"><span class="glyphicon glyphicon-thumbs-down"></span> Employés absents</h3>
                                 </div>
                                 <div class="panel-body" style="font-size: 46px">
-                                   0
+                                    <?php
+                                    //script pour afficher le nb de passages
+                                    $reponse = $bdd->query('SELECT * FROM testhistorique');
+                                    while ($donnees = $reponse->fetch())
+                                    {
+                                        $nbAbsents = 4 - $nbPresents; // remplacer 4 par variable du script qui cmpt les membres
+                                    }
+                                    $reponse->closeCursor(); // Termine le traitement de la requête
+                                    echo $nbAbsents;
+                                    ?>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +129,7 @@ include('scripts/dbConnect.php');
             <!-- résumé passages -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Résumés des passages</h3>
+                    <h3 class="panel-title">Résumé des 10 derniers passages</h3>
                 </div>
                 <div class="panel-body" style="text-align: center">
                     <table class="table">
@@ -99,21 +138,29 @@ include('scripts/dbConnect.php');
                         <th>Date</th>
                         <th>Heure</th>
                         <th>Type</th>
-
-                        <tr class="alert-success">
-                            <td>El asli</td>
-                            <td>Karim</td>
-                            <td>14/12/15</td>
-                            <td>08:15:42</td>
-                            <td>Entrée</td>
-                        </tr>
-                        <tr class="alert-warning">
-                            <td>El asli</td>
-                            <td>Karim</td>
-                            <td>14/12/15</td>
-                            <td>17:54:23</td>
-                            <td>Sortie</td>
-                        </tr>
+                        <?php
+                        //script pour afficher les 10 derniers passages
+                        $reponse = $bdd->query('SELECT * FROM testhistorique ORDER BY id DESC LIMIT 0,10');
+                        while ($donnees = $reponse->fetch())
+                        {
+                            if ($donnees['sens'] == "0"){
+                                $typeA = "alert-success";
+                                $sens = "Entrée";
+                            }
+                            else{
+                                $typeA = "alert-warning";
+                                $sens = "Sortie";
+                            }
+                            echo '<tr class="'.$typeA.'">'.
+                            '<td>'.$donnees['nom'].'</td>'.
+                            '<td>'.$donnees['prenom'].'</td>'.
+                            '<td>'.$donnees['date'].'</td>'.
+                            '<td>'.$donnees['heure'].'</td>'.
+                            '<td>'.$sens.'</td>'
+                            ;
+                        }
+                        $reponse->closeCursor(); // Termine le traitement de la requête
+                        ?>
                     </table>
                 </div>
             </div>
