@@ -17,18 +17,6 @@
 </head>
 
 <body>
-<?php
-
-?>
-<form action="scripts/testWpro.php" method="post">
-    Nom:<br>
-    <input type="text" name="nom" value="">
-    <br>
-    Prenom:<br>
-    <input type="text" name="prenom" value="">
-    <br><br>
-    <input type="submit" value="Valider">
-</form>
 
 </body>
 </html>
