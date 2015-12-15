@@ -39,7 +39,7 @@ $heure = date(H).":".date(i).":".date(s);
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
-                        <li><a href="#">Consultation</a></li>
+                        <li><a href="consult.php">Consultation</a></li>
                         <li><a href="#">Gestion employés</a></li>
                         <li><a href="#">Aide</a></li>
                     </ul>
@@ -65,6 +65,7 @@ $heure = date(H).":".date(i).":".date(s);
                                     <?php
                                     //script pour afficher le nb de passages
                                     $reponse = $bdd->query('SELECT * FROM testhistorique');
+                                    $nbPassages = 0;
                                     while ($donnees = $reponse->fetch())
                                     {
                                         if ($donnees['date'] == $date){
@@ -86,6 +87,7 @@ $heure = date(H).":".date(i).":".date(s);
                                     <?php
                                     //script pour afficher le nb de présent
                                     $reponse = $bdd->query('SELECT * FROM testhistorique');
+                                    $nbPresents = 0;
                                     while ($donnees = $reponse->fetch())
                                     {
                                         if ($donnees['date'] == $date){
@@ -110,7 +112,7 @@ $heure = date(H).":".date(i).":".date(s);
                                 </div>
                                 <div class="panel-body" style="font-size: 46px">
                                     <?php
-                                    //script pour afficher le nb de passages
+                                    //script pour afficher le nb d'absents
                                     $reponse = $bdd->query('SELECT * FROM testhistorique');
                                     while ($donnees = $reponse->fetch())
                                     {
