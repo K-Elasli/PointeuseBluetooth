@@ -7,6 +7,48 @@
     $filDate = $_POST['date'];
     $sens = $_POST['sens'];
     $nbLigne = $_POST['nbligne'];
-    if (!empty($nom) AND !empty($prenom) AND !empty($filDate) AND !empty($nbLigne)){
-        $url = "../pannel/consult.php?nom=".$nom."&prenom=".$prenom."&filDate=".$filDate."&nbligne".$nbLigne;
+    $url = "../pannel/consult.php?";
+    if ($sens == "3"){
+        $sens = "";
     }
+    if (!empty($nom) OR !empty($prenom) OR !empty($filDate) OR !empty($sens) OR !empty($nbLigne)){
+        if (!empty($nom)){
+            $url = $url."nom=".$nom;
+        }
+        if (!empty($prenom)){
+            if (!empty($nom)){
+                $url = $url."&prenom=".$prenom;
+            }
+            else{
+                $url = $url."prenom=".$prenom;
+            }
+        }
+        if (!empty($filDate)){
+            if (!empty($nom OR $prenom)){
+                $url = $url."&date=".$filDate;
+            }
+            else{
+                $url = $url."date=".$filDate;
+            }
+        }
+        if (!empty($sens)){
+            if (!empty($nom OR $prenom OR $filDate)) {
+                $url = $url . "&sens=" . $sens;
+            }
+            else{
+                $url = $url . "sens=" . $sens;
+            }
+        }
+        if (!empty($nbLigne)){
+            if (!empty($nom OR $prenom OR $filDate OR $sens)) {
+                $url = $url . "&nbLigne=" . $nbLigne;
+            }
+            else{
+                $url = $url . "nbLigne=" . $nbLigne;
+            }
+        }
+    }
+    else{
+    $url = "../pannel/consult.php";
+    }
+header("Location: ".$url);
