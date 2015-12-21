@@ -42,7 +42,7 @@ include('../scripts/consultGet.php')
                 <ul class="nav navbar-nav">
                     <li><a href="index.php"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
                     <li class="active"><a href="#">Consultation</a></li>
-                    <li><a href="#">Gestion employés</a></li>
+                    <li><a href="member.php">Gestion employés</a></li>
                     <li><a href="#">Aide</a></li>
                 </ul>
                 <ul class="nav navbar-right">

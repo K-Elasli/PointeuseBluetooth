@@ -40,7 +40,7 @@ $heure = date(H).":".date(i).":".date(s);
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
                         <li><a href="consult.php">Consultation</a></li>
-                        <li><a href="#">Gestion employés</a></li>
+                        <li><a href="member.php">Gestion employés</a></li>
                         <li><a href="#">Aide</a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

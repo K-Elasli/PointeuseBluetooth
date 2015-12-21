@@ -46,5 +46,5 @@ if (!empty($gNom) OR !empty($gPrenom) OR !empty($Date) OR !empty($gSens) OR !emp
 else{
     $quer = "SELECT * FROM testhistorique ORDER BY id DESC LIMIT 0,10";
 }
-
-echo $quer;
+//affiche la requete pour tester
+// echo '<p style="text-align: center">'.$quer.'</p>';
